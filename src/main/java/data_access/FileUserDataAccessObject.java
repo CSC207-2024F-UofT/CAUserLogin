@@ -93,11 +93,6 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
     }
 
     @Override
-    public void setCurrentUser(String name) {
-
-    }
-
-    @Override
     public boolean existsByName(String identifier) {
         return accounts.containsKey(identifier);
     }
@@ -107,5 +102,15 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
         // Replace the User object in the map
         accounts.put(user.getName(), user);
         save();
+    }
+
+    @Override
+    public void setCurrentUser(String name) {
+
+    }
+
+    @Override
+    public String getCurrentUser() {
+        return "";
     }
 }
