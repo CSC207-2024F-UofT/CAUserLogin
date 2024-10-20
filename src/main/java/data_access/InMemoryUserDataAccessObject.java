@@ -41,6 +41,12 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
     } // how does this cause an error?
 
     @Override
+    public String getCurrentUser() {
+        return currentUser;
+    }
+    // Thought question: We've added a getter because the test needs it, not because the program needs it. Is this bad?
+
+    @Override
     public void changePassword(User user) {
         // Replace the old entry with the new password
         users.put(user.getName(), user);
