@@ -53,6 +53,8 @@ public class MainWithInMemory {
         // TODO Task 1.1 in a copy of this file, change this line to use the in-memory DAO.
         final InMemoryUserDataAccessObject userDataAccessObject = new InMemoryUserDataAccessObject();
 
+        // userDataAccessObject.setCurrentUser(user.getName());
+
         final SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
                                                                   signupViewModel, userDataAccessObject);
         views.add(signupView, signupView.getViewName());
