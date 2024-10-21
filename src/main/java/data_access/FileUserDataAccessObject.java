@@ -88,6 +88,11 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
     }
 
     @Override
+    public void setCurrentUser(String username) {
+        // Not implemented yet
+    }
+
+    @Override
     public User get(String username) {
         return accounts.get(username);
     }
@@ -103,4 +108,5 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
         accounts.put(user.getName(), user);
         save();
     }
+
 }
