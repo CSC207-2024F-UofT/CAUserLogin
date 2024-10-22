@@ -1,5 +1,11 @@
 package app;
 
+import java.awt.CardLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
+
 import data_access.InMemoryUserDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.logged_in.LoggedInViewModel;
@@ -10,13 +16,10 @@ import view.LoginView;
 import view.SignupView;
 import view.ViewManager;
 
-import javax.swing.*;
-import java.awt.*;
-
 /**
  * The version of Main with an external database used to persist user data.
  */
-public class MainWithMemory {
+public class MainWithInMemory {
 
     /**
      * The main method for starting the program with an external database used to persist user data.
