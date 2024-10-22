@@ -6,11 +6,9 @@ import entity.User;
 import entity.UserFactory;
 import org.junit.Test;
 
-import java.time.LocalDateTime;
-
 import static org.junit.Assert.*;
 
-public class LoginInteractorTest {
+public class successUserLoggedInTest {
 
     // TODO Task 2.2: make a copy of this test method and follow the instructions in the readme to test your
     //                code from Task 2.1..
