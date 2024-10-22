@@ -119,7 +119,7 @@ public class LoginInteractorTest {
         };
 
         LoginInputBoundary interactor = new LoginInteractor(userRepository, successPresenter);
-        assertNull(userRepository.getCurrentUser());
+        assertNull(null, userRepository.getCurrentUser());
         interactor.execute(inputData);
     }
 }
