@@ -17,7 +17,6 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
                                                      ChangePasswordUserDataAccessInterface {
 
     private final Map<String, User> users = new HashMap<>();
-
     private String currentUser;
 
     @Override
@@ -33,6 +32,20 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
     @Override
     public User get(String username) {
         return users.get(username);
+    }
+
+    @Override
+    public void setCurrentUser(String name) {
+        this.currentUser = name;
+    }
+
+    /**
+     * Gets Current user.
+     * @return nothing
+     */
+    @Override
+    public String getCurrentUser() {
+        return this.currentUser;
     }
 
     @Override
