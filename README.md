@@ -184,8 +184,8 @@ git branch paul.gries
 git switch paul.gries
 ```
 
-2. In the `app` package, make a copy of `MainWithDB.java` and call it
-   `MainWithInMemory.java`.
+2. ~~In the `app` package, make a copy of `MainWithDB.java` and call it
+   `MainWithInMemory.java`.~~
 
 3. To change the type of DAO, you need to edit the place where it is
    instantiated. To find it, right-click on `DBUserDataAccessObject` in the Project tree and
