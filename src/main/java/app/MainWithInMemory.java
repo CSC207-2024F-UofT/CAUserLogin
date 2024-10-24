@@ -1,7 +1,8 @@
 package app;
 
-import javax.swing.*;
 import java.awt.*;
+
+import javax.swing.*;
 
 import data_access.InMemoryUserDataAccessObject;
 import interface_adapter.ViewManagerModel;
