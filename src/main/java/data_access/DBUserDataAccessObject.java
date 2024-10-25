@@ -33,7 +33,7 @@ public class DBUserDataAccessObject implements SignupUserDataAccessInterface,
 
     public DBUserDataAccessObject(UserFactory userFactory) {
         this.userFactory = userFactory;
-        // No need to do anything to reinitialize a user list! The data is the cloud that may be miles away.
+        // No need to d o anything to reinitialize a user list! The data is the cloud that may be miles away.
     }
 
     @Override
@@ -63,6 +63,16 @@ public class DBUserDataAccessObject implements SignupUserDataAccessInterface,
         catch (IOException | JSONException ex) {
             throw new RuntimeException(ex);
         }
+    }
+
+    @Override
+    public void setCurrentUser(String name) {
+
+    }
+
+    @Override
+    public String getCurrentUser() {
+        return "";
     }
 
     @Override
