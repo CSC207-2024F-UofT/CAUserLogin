@@ -12,8 +12,35 @@ import static org.junit.Assert.*;
 
 public class LoginInteractorTest {
 
-    // TODO Task 2.2: make a copy of this test method and follow the instructions in the readme to test your
-    //                code from Task 2.1..
+    // Done Task 2.2
+
+    @Test
+    public void successUserLoggedInTest() {
+        final LoginInputData inputData = new LoginInputData("Paul", "password");
+        final LoginUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+
+        final UserFactory factory = new CommonUserFactory();
+        final User user = factory.create("Paul", "password");
+        userRepository.save(user);
+
+        assertNull(userRepository.getCurrentUser());
+
+        final LoginOutputBoundary successPresenter = new LoginOutputBoundary() {
+            @Override
+            public void prepareSuccessView(LoginOutputData user) {
+                assertEquals("Paul", userRepository.getCurrentUser());
+            }
+
+            @Override
+            public void prepareFailView(String error) {
+                fail("Use case failure is unexpected.");
+            }
+        };
+
+        final LoginInputBoundary interactor = new LoginInteractor(userRepository, successPresenter);
+        interactor.execute(inputData);
+    }
+
     @Test
     public void successTest() {
         LoginInputData inputData = new LoginInputData("Paul", "password");
