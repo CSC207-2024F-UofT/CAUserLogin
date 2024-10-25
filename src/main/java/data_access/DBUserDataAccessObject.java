@@ -123,7 +123,7 @@ public class DBUserDataAccessObject implements SignupUserDataAccessInterface,
         final OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
 
-        // POST METHOD
+        // PUT METHOD
         final MediaType mediaType = MediaType.parse(CONTENT_TYPE_JSON);
         final JSONObject requestBody = new JSONObject();
         requestBody.put(USERNAME, user.getName());
@@ -154,5 +154,11 @@ public class DBUserDataAccessObject implements SignupUserDataAccessInterface,
     @Override
     public void setCurrentUser(String name) {
         // Method intentionally left blank
+    }
+
+    @Override
+    public String getCurrentUser() {
+        // Method intentionally left blank
+        return null;
     }
 }
