@@ -19,6 +19,7 @@ import use_case.signup.SignupUserDataAccessInterface;
 /**
  * The DAO for user data.
  */
+@SuppressWarnings({"checkstyle:RightCurly", "checkstyle:SuppressWarnings"})
 public class DBUserDataAccessObject implements SignupUserDataAccessInterface,
                                                LoginUserDataAccessInterface,
                                                ChangePasswordUserDataAccessInterface {
@@ -117,6 +118,15 @@ public class DBUserDataAccessObject implements SignupUserDataAccessInterface,
         catch (IOException | JSONException ex) {
             throw new RuntimeException(ex);
         }
+    }
+
+    @Override
+    public void setCurrentUser(String name) {
+    }
+
+    @Override
+    public String getCurrentUser() {
+        return "";
     }
 
     @Override
