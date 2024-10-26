@@ -29,4 +29,7 @@ public interface LoginUserDataAccessInterface {
 
     @SuppressWarnings({"checkstyle:MissingJavadocMethod", "checkstyle:SuppressWarnings"})
     void setCurrentUser(String name);
+
+    @SuppressWarnings({"checkstyle:MissingJavadocMethod", "checkstyle:SuppressWarnings"})
+    String getCurrentUser();
 }
