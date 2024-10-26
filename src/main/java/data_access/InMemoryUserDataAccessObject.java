@@ -6,8 +6,8 @@ import java.util.Map;
 import entity.User;
 import use_case.change_password.ChangePasswordUserDataAccessInterface;
 import use_case.login.LoginUserDataAccessInterface;
-import use_case.logout.LogoutUserDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
+// import use_case.logout.LogoutUserDataAccessInterface;
 
 /**
  * In-memory implementation of the DAO for storing user data. This implementation does
@@ -19,7 +19,7 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
 
     private final Map<String, User> users = new HashMap<>();
 
-    private String currentUser;
+    // private String currentUser;
 
     @Override
     public boolean existsByName(String identifier) {
@@ -37,7 +37,7 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
     }
 
     @Override
-    public String getCurrentUsername() {
+    public String getCurrentUser() {
         return "";
     }
 
@@ -48,7 +48,6 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
 
     @Override
     public void setCurrentUser(String name) {
-        this.currentUser = name;
     }
 
     @Override
