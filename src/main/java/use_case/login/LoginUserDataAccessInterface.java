@@ -27,4 +27,6 @@ public interface LoginUserDataAccessInterface {
      */
     User get(String username);
 
+    @SuppressWarnings({"checkstyle:MissingJavadocMethod", "checkstyle:SuppressWarnings"})
+    void setCurrentUser(String name);
 }
