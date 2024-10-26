@@ -15,12 +15,11 @@ import use_case.signup.SignupUserDataAccessInterface;
  */
 public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterface,
         LoginUserDataAccessInterface,
-        ChangePasswordUserDataAccessInterface,
-        LogoutUserDataAccessInterface {
+        ChangePasswordUserDataAccessInterface {
 
     private final Map<String, User> users = new HashMap<>();
 
-    private String currentUsername;
+    private String currentUser;
 
     @Override
     public boolean existsByName(String identifier) {
@@ -38,18 +37,24 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
     }
 
     @Override
+    public String getCurrentUsername() {
+        return "";
+    }
+
+    @Override
+    public void setCurrentUsername(String username) {
+
+    }
+
+    @Override
+    public void setCurrentUser(String name) {
+        this.currentUser = name;
+    }
+
+    @Override
     public void changePassword(User user) {
         // Replace the old entry with the new password
         users.put(user.getName(), user);
     }
 
-    @Override
-    public void setCurrentUsername(String name) {
-        this.currentUsername = name;
-    }
-
-    @Override
-    public String getCurrentUsername() {
-        return this.currentUsername;
-    }
 }
