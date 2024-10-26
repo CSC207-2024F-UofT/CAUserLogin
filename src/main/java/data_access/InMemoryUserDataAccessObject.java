@@ -7,18 +7,19 @@ import entity.User;
 import use_case.change_password.ChangePasswordUserDataAccessInterface;
 import use_case.login.LoginUserDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
+// import use_case.logout.LogoutUserDataAccessInterface;
 
 /**
  * In-memory implementation of the DAO for storing user data. This implementation does
  * NOT persist data between runs of the program.
  */
 public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterface,
-                                                     LoginUserDataAccessInterface,
-                                                     ChangePasswordUserDataAccessInterface {
+        LoginUserDataAccessInterface,
+        ChangePasswordUserDataAccessInterface {
 
     private final Map<String, User> users = new HashMap<>();
 
-    private String currentUser;
+    // private String currentUser;
 
     @Override
     public boolean existsByName(String identifier) {
@@ -33,6 +34,20 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
     @Override
     public User get(String username) {
         return users.get(username);
+    }
+
+    @Override
+    public String getCurrentUser() {
+        return "";
+    }
+
+    @Override
+    public void setCurrentUsername(String username) {
+
+    }
+
+    @Override
+    public void setCurrentUser(String name) {
     }
 
     @Override

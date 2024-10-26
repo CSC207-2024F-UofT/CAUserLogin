@@ -4,17 +4,16 @@ import data_access.InMemoryUserDataAccessObject;
 import entity.CommonUserFactory;
 import entity.User;
 import entity.UserFactory;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-
-public class SignupInteractorTest {
+class SignupInteractorTest {
 
     @Test
-    public void successTest() {
+    void successTest() {
         SignupInputData inputData = new SignupInputData("Paul", "password", "password");
         SignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
 
@@ -43,7 +42,7 @@ public class SignupInteractorTest {
     }
 
     @Test
-    public void failurePasswordMismatchTest() {
+    void failurePasswordMismatchTest() {
         SignupInputData inputData = new SignupInputData("Paul", "password", "wrong");
         SignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
 
@@ -71,7 +70,7 @@ public class SignupInteractorTest {
     }
 
     @Test
-    public void failureUserExistsTest() {
+    void failureUserExistsTest() {
         SignupInputData inputData = new SignupInputData("Paul", "password", "wrong");
         SignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
 

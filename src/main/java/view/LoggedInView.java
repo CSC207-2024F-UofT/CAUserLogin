@@ -1,8 +1,6 @@
 package view;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -15,19 +13,21 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import interface_adapter.logged_in.ChangePasswordController;
-import interface_adapter.logged_in.LoggedInState;
-import interface_adapter.logged_in.LoggedInViewModel;
+import interface_adapter.change_password.ChangePasswordController;
+import interface_adapter.change_password.LoggedInState;
+import interface_adapter.change_password.LoggedInViewModel;
+import interface_adapter.logout.LogoutController;
 
 /**
  * The View for when the user is logged into the program.
  */
-public class LoggedInView extends JPanel implements ActionListener, PropertyChangeListener {
+public class LoggedInView extends JPanel implements PropertyChangeListener {
 
     private final String viewName = "logged in";
     private final LoggedInViewModel loggedInViewModel;
     private final JLabel passwordErrorField = new JLabel();
-    private final ChangePasswordController changePasswordController;
+    private ChangePasswordController changePasswordController;
+    private LogoutController logoutController;
 
     private final JLabel username;
 
@@ -36,10 +36,9 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     private final JTextField passwordInputField = new JTextField(15);
     private final JButton changePassword;
 
-    public LoggedInView(LoggedInViewModel loggedInViewModel, ChangePasswordController changePasswordController) {
+    public LoggedInView(LoggedInViewModel loggedInViewModel) {
         this.loggedInViewModel = loggedInViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
-        this.changePasswordController = changePasswordController;
 
         final JLabel title = new JLabel("Logged In Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -56,8 +55,6 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
         changePassword = new JButton("Change Password");
         buttons.add(changePassword);
-
-        logOut.addActionListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -99,6 +96,18 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
                 }
         );
 
+        logOut.addActionListener(
+                // This creates an anonymous subclass of ActionListener and instantiates it.
+                evt -> {
+                    if (evt.getSource().equals(logOut)) {
+                        // 1. get the state out of the loggedInViewModel. It contains the username.
+                        // 2. Execute the logout Controller.
+                        final LoggedInState currentState = loggedInViewModel.getState();
+                        logoutController.execute(currentState.getUsername());
+                    }
+                }
+        );
+
         this.add(title);
         this.add(usernameInfo);
         this.add(username);
@@ -106,14 +115,6 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         this.add(passwordInfo);
         this.add(passwordErrorField);
         this.add(buttons);
-    }
-
-    /**
-     * React to a button click that results in evt.
-     * @param evt the ActionEvent to react to
-     */
-    public void actionPerformed(ActionEvent evt) {
-        System.out.println("Click " + evt.getActionCommand());
     }
 
     @Override
@@ -131,5 +132,13 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
     public String getViewName() {
         return viewName;
+    }
+
+    public void setChangePasswordController(ChangePasswordController changePasswordController) {
+        this.changePasswordController = changePasswordController;
+    }
+
+    public void setLogoutController(LogoutController logoutController) {
+        this.logoutController = logoutController;
     }
 }
