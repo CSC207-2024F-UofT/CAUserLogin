@@ -64,7 +64,7 @@ public class LoginInteractorTest {
         };
 
         LoginInputBoundary interactor = new LoginInteractor(userRepository, successPresenter);
-        assertNull(interactor);
+        assertNull(inputData.getUsername());
         interactor.execute(inputData);
     }
 
