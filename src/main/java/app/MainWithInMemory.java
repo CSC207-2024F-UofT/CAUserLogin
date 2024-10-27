@@ -26,7 +26,7 @@ public class MainWithInMemory {
      */
     public static void main(String[] args) {
         // Build the main program window, the main panel containing the
-        // various cards, and the layout, and stitch them together.
+        // various cards, and the layout, and stitch them together.s
 
         // The main application window.
         final JFrame application = new JFrame("Login Example");
