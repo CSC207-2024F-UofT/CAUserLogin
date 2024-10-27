@@ -21,6 +21,11 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
     private String currentUser;
 
     @Override
+    public String getCurrentUser() {
+        return currentUser;
+    }
+
+    @Override
     public boolean existsByName(String identifier) {
         return users.containsKey(identifier);
     }
@@ -33,6 +38,11 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
     @Override
     public User get(String username) {
         return users.get(username);
+    }
+
+    @Override
+    public void setCurrentUser(String name) {
+        currentUser = name;
     }
 
     @Override

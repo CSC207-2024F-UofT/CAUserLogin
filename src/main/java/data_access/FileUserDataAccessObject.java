@@ -29,6 +29,9 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, User> accounts = new HashMap<>();
 
+    @SuppressWarnings({"checkstyle:ExplicitInitialization", "checkstyle:SuppressWarnings"})
+    private String currentUser = null;
+
     public FileUserDataAccessObject(String csvPath, UserFactory userFactory) throws IOException {
 
         csvFile = new File(csvPath);
@@ -90,6 +93,16 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
     @Override
     public User get(String username) {
         return accounts.get(username);
+    }
+
+    @Override
+    public void setCurrentUser(String username) {
+        this.currentUser = username;
+    }
+
+    @Override
+    public String getCurrentUser() {
+        return currentUser;
     }
 
     @Override
