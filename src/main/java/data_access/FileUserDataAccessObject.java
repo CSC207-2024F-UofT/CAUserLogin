@@ -24,7 +24,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
                                                  ChangePasswordUserDataAccessInterface {
 
     private static final String HEADER = "username,password";
-
+    private String currentUser;
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, User> accounts = new HashMap<>();
@@ -103,4 +103,14 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
         accounts.put(user.getName(), user);
         save();
     }
+
+    @Override
+    public void setCurrentUser(String name) {
+        this.currentUser = name;
+    }
+
+    public String getCurrentUser() {
+        return currentUser;
+    }
+
 }
