@@ -1,6 +1,7 @@
 package use_case.login;
 
 import data_access.InMemoryUserDataAccessObject;
+import entity.CommonUser;
 import entity.CommonUserFactory;
 import entity.User;
 import entity.UserFactory;
@@ -94,5 +95,32 @@ public class LoginInteractorTest {
 
         LoginInputBoundary interactor = new LoginInteractor(userRepository, failurePresenter);
         interactor.execute(inputData);
+    }
+
+    public void successUserLoggedInTest() {
+        LoginInputData inputData = new LoginInputData("Paul", "password");
+        InMemoryUserDataAccessObject userDataAccessObject = new InMemoryUserDataAccessObject();
+        userDataAccessObject.save(new CommonUser("Paul", "password"));
+
+        LoginOutputBoundary loginPresenter = new LoginOutputBoundary() {
+            @Override
+            public void prepareSuccessView(LoginOutputData outputData) {
+                assertEquals("Paul", outputData.getUsername());
+            }
+
+            @Override
+            public void prepareFailView(String error) {
+                fail("Expected successful login, but login failed with error: " + error);
+            }
+        };
+
+        LoginInteractor interactor = new LoginInteractor(userDataAccessObject, loginPresenter);
+
+        // Act: Before login, ensure no user is logged in, then execute login
+        assertNull(userDataAccessObject.getCurrentUser());  // Verify initial state (no user logged in)
+        interactor.execute(inputData);  // Perform login for "Paul"
+
+        // Assert: Check that the current user is now "Paul"
+        assertEquals("Paul", userDataAccessObject.getCurrentUser());
     }
 }
