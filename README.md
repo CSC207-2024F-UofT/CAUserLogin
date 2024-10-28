@@ -1,7 +1,6 @@
 # Homework 5: Clean Architecture User Login System Example
 
 ## Assignment Preamble
-
 In this homework, you will work with a program designed using Clean Architecture.
 The program initially has three complete use cases: signup, login, and change password.
 
