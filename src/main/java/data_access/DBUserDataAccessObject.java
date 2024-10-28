@@ -17,7 +17,7 @@ import use_case.login.LoginUserDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
 
 /**
- * The DAO for user data.
+ * The DAO for user data. Data access object call a database, and get information from it.
  */
 public class DBUserDataAccessObject implements SignupUserDataAccessInterface,
                                                LoginUserDataAccessInterface,
@@ -42,7 +42,7 @@ public class DBUserDataAccessObject implements SignupUserDataAccessInterface,
         final OkHttpClient client = new OkHttpClient().newBuilder().build();
         final Request request = new Request.Builder()
                 .url(String.format("http://vm003.teach.cs.toronto.edu:20112/user?username=%s", username))
-                .addHeader("Content-Type", CONTENT_TYPE_JSON)
+                .addHeader(CONTENT_TYPE_LABEL, CONTENT_TYPE_JSON)
                 .build();
         try {
             final Response response = client.newCall(request).execute();
@@ -53,7 +53,7 @@ public class DBUserDataAccessObject implements SignupUserDataAccessInterface,
                 final JSONObject userJSONObject = responseBody.getJSONObject("user");
                 final String name = userJSONObject.getString(USERNAME);
                 final String password = userJSONObject.getString(PASSWORD);
-
+                // we ask ths userFactory to creat a user Object from the information in API.
                 return userFactory.create(name, password);
             }
             else {
@@ -66,6 +66,22 @@ public class DBUserDataAccessObject implements SignupUserDataAccessInterface,
     }
 
     @Override
+    public void setCurrentUser(String name) {
+
+    }
+
+    @Override
+    public String getCurrentUser() {
+        return "";
+    }
+
+    /**
+     * Method existsByName takes in a username, and check if it is already in the remote API.
+     * @param username provide a username
+     * @return True or False
+     */
+    @Override
+
     public boolean existsByName(String username) {
         final OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();

@@ -36,7 +36,7 @@ During this assignment, you will:
 Open the project in IntelliJ and make sure you can successfully run `app/MainWithDB.java`.
 Note: you may need to set the Project SDK in the `Project Structure...` menu, and possibly
 also manually link the Maven project.
-
+       
 ## Task 1: Understanding the Program
 
 Try the signup, login, and change password use cases by running the program.

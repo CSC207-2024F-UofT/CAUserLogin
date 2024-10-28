@@ -18,6 +18,7 @@ public class ViewModel<T> {
 
     private T state;
 
+    // this is the line execute when we say super("log in") in class LoginViewModel.
     public ViewModel(String viewName) {
         this.viewName = viewName;
     }

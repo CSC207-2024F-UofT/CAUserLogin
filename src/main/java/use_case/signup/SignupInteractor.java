@@ -8,6 +8,7 @@ import entity.UserFactory;
  */
 public class SignupInteractor implements SignupInputBoundary {
     private final SignupUserDataAccessInterface userDataAccessObject;
+    // Because we have Output boundary, we can call presenter without ruining the rule.
     private final SignupOutputBoundary userPresenter;
     private final UserFactory userFactory;
 

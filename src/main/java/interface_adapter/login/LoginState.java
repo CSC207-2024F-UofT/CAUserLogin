@@ -1,7 +1,7 @@
 package interface_adapter.login;
 
 /**
- * The state for the Login View Model.
+ * The state for the Login View Model. A data-holding class that manages and stores login state information
  */
 public class LoginState {
     private String username = "";
@@ -20,6 +20,7 @@ public class LoginState {
         return password;
     }
 
+    // The "setter" methods allow other classes to set or update the values of each.
     public void setUsername(String username) {
         this.username = username;
     }
