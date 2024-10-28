@@ -34,9 +34,8 @@ public interface LoginUserDataAccessInterface {
     void setCurrentUser(String name);
 
     /**
-     * Set name of current user in application.
-     * @param name the user we need to set up
+     * Get name of current user in application.
+     * @return name the user as a String. Use "" to show that user is not set
      */
-
     String getCurrentUser();
 }
