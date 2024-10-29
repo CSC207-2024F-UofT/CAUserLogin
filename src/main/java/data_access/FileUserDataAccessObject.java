@@ -20,8 +20,8 @@ import use_case.signup.SignupUserDataAccessInterface;
  * DAO for user data implemented using a File to persist the data.
  */
 public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
-                                                 LoginUserDataAccessInterface,
-                                                 ChangePasswordUserDataAccessInterface {
+        LoginUserDataAccessInterface,
+        ChangePasswordUserDataAccessInterface {
 
     private static final String HEADER = "username,password";
 
@@ -39,19 +39,18 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
             save();
         }
         else {
-
             try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
                 final String header = reader.readLine();
 
                 if (!header.equals(HEADER)) {
-                    throw new RuntimeException(String.format("header should be%n: %s%but was:%n%s", HEADER, header));
+                    throw new RuntimeException(String.format("header should be%n: %s%nbut was:%n%s", HEADER, header));
                 }
 
                 String row;
                 while ((row = reader.readLine()) != null) {
                     final String[] col = row.split(",");
-                    final String username = String.valueOf(col[headers.get("username")]);
-                    final String password = String.valueOf(col[headers.get("password")]);
+                    final String username = col[headers.get("username")];
+                    final String password = col[headers.get("password")];
                     final User user = userFactory.create(username, password);
                     accounts.put(username, user);
                 }
@@ -60,9 +59,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
     }
 
     private void save() {
-        final BufferedWriter writer;
-        try {
-            writer = new BufferedWriter(new FileWriter(csvFile));
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFile))) {
             writer.write(String.join(",", headers.keySet()));
             writer.newLine();
 
@@ -72,9 +69,6 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
                 writer.write(line);
                 writer.newLine();
             }
-
-            writer.close();
-
         }
         catch (IOException ex) {
             throw new RuntimeException(ex);
@@ -102,5 +96,16 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
         // Replace the User object in the map
         accounts.put(user.getName(), user);
         save();
+    }
+
+    @Override
+    public void setCurrentUser(String name) {
+        // Method intentionally left blank
+    }
+
+    @Override
+    public String getCurrentUser() {
+        // Method intentionally left blank
+        return null;
     }
 }
