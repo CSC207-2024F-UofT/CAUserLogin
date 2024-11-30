@@ -9,6 +9,7 @@ public interface LoginUserDataAccessInterface {
 
     /**
      * Checks if the given username exists.
+     *
      * @param username the username to look for
      * @return true if a user with the given username exists; false otherwise
      */
@@ -16,15 +17,25 @@ public interface LoginUserDataAccessInterface {
 
     /**
      * Saves the user.
+     *
      * @param user the user to save
      */
     void save(User user);
 
     /**
      * Returns the user with the given username.
+     *
      * @param username the username to look up
      * @return the user with the given username
      */
     User get(String username);
 
+    /**
+     * Sets the current name of the user.
+     *
+     * @param name the name of current user
+     */
+    void setCurrentUser(String name);
+
+    String getCurrentUser();
 }
