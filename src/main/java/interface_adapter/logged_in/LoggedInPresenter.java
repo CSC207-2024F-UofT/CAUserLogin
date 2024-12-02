@@ -21,6 +21,7 @@ public class LoggedInPresenter implements ChangePasswordOutputBoundary {
     @Override
     public void prepareSuccessView(ChangePasswordOutputData outputData) {
         // TODO update the viewmodel!
+
         loggedInViewModel.firePropertyChanged("password");
 
     }
