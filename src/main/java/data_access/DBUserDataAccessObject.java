@@ -31,9 +31,26 @@ public class DBUserDataAccessObject implements SignupUserDataAccessInterface,
     private static final String MESSAGE = "message";
     private final UserFactory userFactory;
 
+    private String currentUsername;
+
     public DBUserDataAccessObject(UserFactory userFactory) {
         this.userFactory = userFactory;
+        this.currentUsername = null;
+
         // No need to do anything to reinitialize a user list! The data is the cloud that may be miles away.
+    }
+
+    @Override
+    public void setCurrentUser(String username) {
+        this.currentUsername = username;
+    }
+
+    @Override
+    public String getCurrentUser() {
+        if (this.currentUsername == null) {
+            throw new RuntimeException("No current user is set");
+        }
+        return this.currentUsername;
     }
 
     @Override

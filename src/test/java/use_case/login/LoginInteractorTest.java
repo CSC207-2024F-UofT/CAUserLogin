@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import static org.junit.Assert.*;
 
 public class LoginInteractorTest {
+    private LoginInteractor interactor;  // The interactor we are testing
 
     // TODO Task 2.2: make a copy of this test method and follow the instructions in the readme to test your
     //                code from Task 2.1..
@@ -23,6 +24,9 @@ public class LoginInteractorTest {
         UserFactory factory = new CommonUserFactory();
         User user = factory.create("Paul", "password");
         userRepository.save(user);
+
+        // Check that the current user is null before the login process starts
+        assertNull(userRepository.getCurrentUser());
 
         // This creates a successPresenter that tests whether the test case is as we expect.
         LoginOutputBoundary successPresenter = new LoginOutputBoundary() {
@@ -41,6 +45,35 @@ public class LoginInteractorTest {
         interactor.execute(inputData);
     }
 
+    //                code from Task 2.1..
+    @Test
+    public void successUserLoggedInTest() {
+        LoginInputData inputData = new LoginInputData("Paul", "password");
+        LoginUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+
+        // For the success test, we need to add Paul to the data access repository before we log in.
+        UserFactory factory = new CommonUserFactory();
+        User user = factory.create("Paul", "password");
+        userRepository.save(user);
+
+        assertNull(userRepository.getCurrentUser());  // This checks that currentUser is null before the login process starts
+
+        // This creates a successPresenter that tests whether the test case is as we expect.
+        LoginOutputBoundary successPresenter = new LoginOutputBoundary() {
+            @Override
+            public void prepareSuccessView(LoginOutputData user) {
+                assertEquals("Paul", userRepository.getCurrentUser());
+            }
+
+            @Override
+            public void prepareFailView(String error) {
+                fail("Use case failure is unexpected.");
+            }
+        };
+
+        LoginInputBoundary interactor = new LoginInteractor(userRepository, successPresenter);
+        interactor.execute(inputData);
+    }
 
     @Test
     public void failurePasswordMismatchTest() {

@@ -15,7 +15,6 @@ import use_case.signup.SignupUserDataAccessInterface;
 public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterface,
                                                      LoginUserDataAccessInterface,
                                                      ChangePasswordUserDataAccessInterface {
-
     private final Map<String, User> users = new HashMap<>();
 
     private String currentUser;
@@ -39,6 +38,16 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
     public void changePassword(User user) {
         // Replace the old entry with the new password
         users.put(user.getName(), user);
+    }
+
+    @Override
+    public void setCurrentUser(String username) {
+        this.currentUser = username;
+    }
+
+    // Optional: You can add a getter for the current user if needed for testing
+    public String getCurrentUser() {
+        return this.currentUser;
     }
 
 }
